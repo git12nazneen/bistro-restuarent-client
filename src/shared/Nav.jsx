@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import logo from '../assets/logo.png'
+import { Link } from "react-router-dom";
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState(0);
@@ -12,25 +13,26 @@ const Nav = () => {
   };
 
   const navLinks = () => {
-    const items = ["Home", "About", "Contact", "Shop"];
+    const items = ["Home", "Menu", "Shop", "Contact"];
     return items.map((item, index) => (
       <li key={index}>
-        <a
-          className={`my-2 text-white transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0 ${
-            active === index ? "font-extrabold text-orange-600" : "font light"
+        <Link
+          className={`my-2 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0 ${
+            active === index ? "font-extrabold text-xl text-orange-600" : "font light"
           }`}
-          href="#"
+        
+          to={`/${item.toLowerCase()}`}
           onClick={() => handleItemClick(index)}
         >
           {item}
-        </a>
+        </Link>
       </li>
     ));
   };
 
   return (
     <div>
-     <nav className="navbar max-w-6xl mx-auto fixed z-10 bg-black bg-opacity-40 text-white">
+     <nav className="navbar fixed z-10 bg-black bg-opacity-40 text-white">
         <div class="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
           <div class="flex items-center justify-between">
             <a href="#">
@@ -123,3 +125,5 @@ const Nav = () => {
 };
 
 export default Nav;
+
+

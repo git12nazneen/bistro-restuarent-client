@@ -18,7 +18,7 @@ import SectionTitle from '../../shared/SectionTitle';
 
 const Order = () => {
     return (
-        <>
+        <div className='max-w-6xl mx-auto'>
           <SectionTitle
           heading={'From 10 am to 11 pm'}
           subheading={'ORDER ONLINE'}>
@@ -50,7 +50,7 @@ const Order = () => {
         </SwiperSlide>
         
       </Swiper>
-      </>
+      </div>
     );
 };
 

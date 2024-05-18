@@ -5,6 +5,9 @@ import {
 import Root from '../Root/Root';
 import Home from '../Pages/Home/Home';
 import Error from '../Components/Error';
+import Menu from '../Pages/MenuPage/Menu';
+import Shop from '../Pages/ShopPage/Shop';
+import Contact from '../Pages/Contact/Contact';
 const router = createBrowserRouter([
     {
       path: "/",
@@ -12,8 +15,19 @@ const router = createBrowserRouter([
       errorElement: <Error />,
       children:[
         {
-            path:'/',
+            path:'/home',
             element:<Home></Home>
+        },
+        {
+          path:'/menu',
+          element:<Menu></Menu>
+        },
+        {
+          path:'/shop',
+          element:<Shop></Shop>
+        },{
+          path:'/contact',
+          element:<Contact></Contact>
         }
       ]
     },

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SectionTitle from "../../shared/SectionTitle";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "@smastrom/react-rating/style.css";
 import 'swiper/css/navigation';
-// Import Swiper styles
 import "swiper/css";
 import { Rating } from "@mui/material";
 import { Navigation } from "swiper/modules";
@@ -17,7 +15,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mb-10">
       <SectionTitle
         heading={"What our clients say"}
         subheading={"Testimonial"}
@@ -41,7 +39,7 @@ const Testimonial = () => {
                 />
                 <h3>{reviews.details}</h3>
 
-                <p>{reviews.name}</p>
+                <p className="font-bold text-orange-600 text-3xl">{reviews.name}</p>
               </div>
             </SwiperSlide>
           ))}
