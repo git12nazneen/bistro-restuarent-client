@@ -9,7 +9,7 @@ import { Navigation } from "swiper/modules";
 const Testimonial = () => {
   const [review, setReview] = useState([]);
   useEffect(() => {
-    fetch("reviews.json")
+    fetch("http://localhost:5000/reviews")
       .then((res) => res.json())
       .then((data) => setReview(data));
   }, []);

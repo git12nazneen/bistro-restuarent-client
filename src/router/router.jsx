@@ -7,7 +7,10 @@ import Home from '../Pages/Home/Home';
 import Error from '../Components/Error';
 import Menu from '../Pages/MenuPage/Menu';
 import Shop from '../Pages/ShopPage/Shop';
-import Contact from '../Pages/Contact/Contact';
+import Login from '../Pages/Contact/Login';
+import SignUp from '../Pages/Contact/SignUp';
+import Secret from '../Components/Secret';
+import PrivateRoute from '../providers/PrivateRoute';
 const router = createBrowserRouter([
     {
       path: "/",
@@ -15,7 +18,7 @@ const router = createBrowserRouter([
       errorElement: <Error />,
       children:[
         {
-            path:'/home',
+            path:'/',
             element:<Home></Home>
         },
         {
@@ -23,11 +26,19 @@ const router = createBrowserRouter([
           element:<Menu></Menu>
         },
         {
-          path:'/shop',
+          path:'/shop/:category',
           element:<Shop></Shop>
         },{
-          path:'/contact',
-          element:<Contact></Contact>
+          path:'/login',
+          element:<Login></Login>
+        },
+        {
+          path:'/signUp',
+          element:<SignUp></SignUp>
+        },
+        {
+          path:'/secret',
+          element:<PrivateRoute><Secret></Secret></PrivateRoute>
         }
       ]
     },

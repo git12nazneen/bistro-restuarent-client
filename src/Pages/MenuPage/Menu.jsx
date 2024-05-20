@@ -23,17 +23,17 @@ const Menu = () => {
                  <title>Bistro Boss || Menu</title>
             </Helmet>
             <Cover img={cover} title={'Our menu'} titleBottom={'Would you like to try a dish?'}></Cover>
-            <SectionTitle heading={'Dont miss'} subheading={'Todays Offer'}></SectionTitle>
-            <MenuCategory items={offered}></MenuCategory>
+            <SectionTitle heading={'Dont miss'} subheading={'Todays offer'}></SectionTitle>
+            <MenuCategory items={offered} ></MenuCategory>
+           
             {/*  */}
-            <Cover img={desert} title={'DESERTS'} titleBottom={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}></Cover>
-            <MenuCategory items={dessert}></MenuCategory> 
-            <Cover img={Pizza} title={'PIZZA'} titleBottom={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}></Cover>
-            <MenuCategory items={pizza}></MenuCategory> 
-            <Cover img={Salad} title={'SALADS'} titleBottom={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}></Cover>
-            <MenuCategory items={salad}></MenuCategory> 
-            <Cover img={Soup} title={'SOUPS'} titleBottom={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}></Cover>
-            <MenuCategory items={soup}></MenuCategory> 
+            <MenuCategory items={dessert} img={desert} title={'dessert'}></MenuCategory> 
+            {/*  */}
+             <MenuCategory items={pizza} img={Pizza} title={'pizza'}></MenuCategory> 
+            {/*  */}
+            <MenuCategory items={salad} img={Salad} title={'salad'}></MenuCategory> 
+            {/*  */}
+             <MenuCategory items={soup} img={Soup} title={'soup'} ></MenuCategory> 
         </div>
     );
 };

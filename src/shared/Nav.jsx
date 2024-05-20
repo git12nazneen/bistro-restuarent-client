@@ -1,46 +1,89 @@
-import React, { useState } from "react";
-import logo from '../assets/logo.png'
+import React, { useContext, useState } from "react";
+import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import Swal from "sweetalert2";
 const Nav = () => {
+  const { user, logOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState(0);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleItemClick = (index) => {
-    setActive(index);
+  const handleLogOut = () => {
+    logOut().then();
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "log out success",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
-  const navLinks = () => {
-    const items = ["Home", "Menu", "Shop", "Contact"];
-    return items.map((item, index) => (
-      <li key={index}>
-        <Link
-          className={`my-2 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0 ${
-            active === index ? "font-extrabold text-xl text-orange-600" : "font light"
-          }`}
-        
-          to={`/${item.toLowerCase()}`}
-          onClick={() => handleItemClick(index)}
-        >
-          {item}
-        </Link>
+  // const handleItemClick = (index) => {
+  //   setActive(index);
+  // };
+
+  // const navLinks = () => {
+  //   // const items = ["Home", "Menu", "Shop", "Contact"];
+  //   // return items.map((item, index) => (
+  //   //   <li key={index}>
+  //   //     <Link
+  //   //       className={`my-2 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0 ${
+  //   //         active === index ? "font-extrabold text-xl text-orange-600" : "font light"
+  //   //       }`}
+
+  //   //       to={`/${item.toLowerCase()}`}
+  //   //       onClick={() => handleItemClick(index)}
+  //   //     >
+  //   //       {item}
+  //   //     </Link>
+  //   //   </li>
+  //   // ));
+
+  // };
+
+  const navLinks = (
+    <>
+      <li className="px-3">
+        <Link to="/">Home</Link>
       </li>
-    ));
-  };
+      <li className="px-3">
+        <Link to="/menu">Menu</Link>
+      </li>
+      <li className="px-3">
+        <Link to="/shop/salad">Shop</Link>
+      </li>
+      <li className="px-3">
+        <Link to="/secret">Secret</Link>
+      </li>
+
+      {user ? (
+        <>
+          <button onClick={handleLogOut} className="btn">
+            Logout
+          </button>{" "}
+        </>
+      ) : (
+        <>
+          {" "}
+          <li className="px-3">
+            <Link to="/login">Login</Link>
+          </li>
+        </>
+      )}
+    </>
+  );
 
   return (
     <div>
-     <nav className="navbar fixed z-10 bg-black bg-opacity-40 text-white">
+      <nav className="navbar fixed z-10 bg-black bg-opacity-40 text-white">
         <div class="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
           <div class="flex items-center justify-between">
             <a href="#">
-              <img
-                class="w-auto h-6 sm:h-7"
-                src={logo}
-                alt=""
-              />
+              <img class="w-auto h-6 sm:h-7" src={logo} alt="" />
             </a>
 
             <div class="flex lg:hidden">
@@ -91,15 +134,13 @@ const Nav = () => {
             } lg:flex flex-grow items-center md:ml-4 md:flex md:flex-row-reverse`}
           >
             <ul class="flex flex-col md:flex-row md:mx-6 md:ml-auto">
-              {navLinks()}
+              {navLinks}
             </ul>
           </div>
-
-          <div class="flex justify-center md:block">
-            <a
-              class="relative text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300"
-              href="#"
-            >
+          <div>
+            
+          <Link to='/'>
+          <button className="btn">
               <svg
                 class="w-5 h-5"
                 viewBox="0 0 24 24"
@@ -114,9 +155,9 @@ const Nav = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-
-              <span class="absolute top-0 left-0 p-1 text-xs text-white bg-blue-500 rounded-full"></span>
-            </a>
+              <div className="badge badge-secondary">0</div>
+            </button>
+          </Link>
           </div>
         </div>
       </nav>
@@ -125,5 +166,3 @@ const Nav = () => {
 };
 
 export default Nav;
-
-
