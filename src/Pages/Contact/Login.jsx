@@ -12,7 +12,7 @@ const Login = () => {
      const {signIn} = useContext(AuthContext)
 
     const from = location.state?.from?.pathname || '/';
-
+    console.log('state in location',location.state)
     useEffect(()=>{
         loadCaptchaEnginge(6); 
     },[])

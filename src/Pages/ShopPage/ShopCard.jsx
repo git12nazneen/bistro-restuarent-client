@@ -1,10 +1,11 @@
 
 import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ShopCard = ({ item }) => {
   const navigate = useNavigate()
+  const location = useLocation()
   const {user} = UseAuth()
   const { recipe, category, name, image, price } = item;
  
@@ -26,7 +27,7 @@ const ShopCard = ({ item }) => {
       }).then((result) => {
         if (result.isConfirmed) {
         //  send the use to login page
-        navigate('/login')
+        navigate('/login', {state:{from:location}})
         }
       });
     }
