@@ -3,13 +3,15 @@ import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCard from "../../hooks/useCard";
 
 const ShopCard = ({ item }) => {
   const navigate = useNavigate()
   const location = useLocation()
-  const axiosSecure = UseAxiosSecure()
+  const axiosSecure = useAxiosSecure()
   const {user} = UseAuth()
+  const [, refetch] = useCard()
   const { recipe, category, name, image, price ,  _id} = item;
  
   const handleAddFood = food =>{
@@ -31,7 +33,10 @@ const ShopCard = ({ item }) => {
       if(res.data.insertedId){
         toast.success('Successfully add to cart')
       }
+      // refetch cart to update the cart items count
+      refetch()
       })
+    
       .catch(error => {
         toast.error('An error occurred'); // Handle error cases
       });
@@ -64,7 +69,7 @@ const ShopCard = ({ item }) => {
           <h2 className="card-title">{name}</h2>
           <p>{recipe}</p>
           <div className="card-actions">
-            <button onClick={()=>handleAddFood(item)} className="btn bg-orange-600 border-b-4 border-black hover:bg-black">
+            <button onClick={handleAddFood} className="btn bg-orange-600 border-b-4 border-black hover:bg-black">
               Add to cart
             </button>
           </div>

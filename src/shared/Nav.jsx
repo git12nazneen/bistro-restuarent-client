@@ -3,10 +3,12 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
+import useCard from "../hooks/useCard";
 const Nav = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState(0);
+  const [cart] = useCard()
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -139,7 +141,7 @@ const Nav = () => {
           </div>
           <div>
             
-          <Link to='/'>
+          <Link to='/dashboard/cart'>
           <button className="btn">
               <svg
                 class="w-5 h-5"
@@ -155,7 +157,7 @@ const Nav = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <div className="badge badge-secondary">0</div>
+              <div className="badge badge-secondary">{cart.length}</div>
             </button>
           </Link>
           </div>
