@@ -2,19 +2,40 @@
 import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure";
 
 const ShopCard = ({ item }) => {
   const navigate = useNavigate()
   const location = useLocation()
+  const axiosSecure = UseAxiosSecure()
   const {user} = UseAuth()
-  const { recipe, category, name, image, price } = item;
+  const { recipe, category, name, image, price ,  _id} = item;
  
   const handleAddFood = food =>{
     // console.log(food, user.email)
     if(user && user.email ){
       // send food
-
-    }
+      console.log(user.email, food)
+      const cartItem = {
+        menuId:_id,
+        email:user.email,
+        name,
+        image,
+        price
+      }
+      axiosSecure.post('/carts', cartItem)
+      .then(res => {
+       console.log(res.data)
+      //  toast.success('Successfully add to cart')
+      if(res.data.insertedId){
+        toast.success('Successfully add to cart')
+      }
+      })
+      .catch(error => {
+        toast.error('An error occurred'); // Handle error cases
+      });
+  }
     else{
       Swal.fire({
         title: "Add food?",
@@ -49,6 +70,7 @@ const ShopCard = ({ item }) => {
           </div>
         </div>
       </div>
+    
     </div>
   );
 };
