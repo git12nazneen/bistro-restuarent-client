@@ -2,11 +2,36 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
+
+  // TODO: get isAdmin value from the db
+  const isAdmin = true;
+
   return (
     <div className="flex">
       <div className="w-64 min-h-screen bg-orange-600">
         <ul className="menu">
+         {
+          isAdmin? <>
+           <li>
+            <NavLink to="/dashboard/adminHome">Admin home</NavLink>
+          </li>
           <li>
+            <NavLink to="/dashboard/addItems">
+              
+              Add items</NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/cart"> Manage items</NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/bookings">Manage Bookings</NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/users">All Users</NavLink>
+          </li>
+          
+          </> : <>
+           <li>
             <NavLink to="/dashboard/userHome">User home</NavLink>
           </li>
           <li>
@@ -21,6 +46,9 @@ const Dashboard = () => {
           <li>
             <NavLink to="/dashboard/myBookings">My Bookings</NavLink>
           </li>
+          </>
+         }
+          {/* shared li */}
           <div className="divider"></div>
           <li>
             <NavLink to="/">Home</NavLink>
