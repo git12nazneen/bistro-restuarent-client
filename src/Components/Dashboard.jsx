@@ -1,10 +1,11 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
 
   // TODO: get isAdmin value from the db
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   return (
     <div className="flex">
