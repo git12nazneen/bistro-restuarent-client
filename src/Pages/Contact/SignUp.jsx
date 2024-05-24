@@ -9,6 +9,8 @@ const SignUp = () => {
   const axiosPublic = UseAxiosPublic();
   const { createUser, updateUserProfile, googleSignIn} = useContext(AuthContext);
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  console.log("state in location", location.state);
   const {
     register,
     handleSubmit,
@@ -46,7 +48,7 @@ const SignUp = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
-              navigate("/");
+              navigate(from, { replace: true });
             }
           });
           console.log("user info update");
