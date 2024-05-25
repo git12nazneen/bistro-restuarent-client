@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import SectionTitle from '../../shared/SectionTitle';
 import UseMenu from '../../hooks/UseMenu';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 const ManageItems = () => {
   const [menu, loading, refetch] = UseMenu(); // Ensure you get all three values
@@ -76,9 +77,11 @@ const ManageItems = () => {
                 <td><h1>{item.name}</h1></td>
                 <td>${item.price}</td>
                 <th>
-                  <button className="btn btn-xs">
+                 <Link to={`/dashboard/updatedItem/${item._id}`}>
+                 <button className="btn btn-xs">
                     <FaEdit className="text-red-700" />
                   </button>
+                  </Link>
                 </th>
                 <th>
                   <button onClick={() => handleDelete(item)} className="btn btn-xs">

@@ -1,14 +1,17 @@
 import React from "react";
 import SectionTitle from "../../shared/SectionTitle";
-import { useForm } from "react-hook-form";
+import { useLoaderData } from "react-router-dom";
 import UseAxiosPublic from "../../hooks/UseAxiosPublic";
-import axios from "axios";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddItems = () => {
+const UpdateItem = ( ) => {
+  const {name, category, recipe, price, _id} = useLoaderData();
+ 
   const { register, handleSubmit } = useForm();
   const axiosPublic = UseAxiosPublic();
   const axiosSecure = useAxiosSecure();
@@ -31,10 +34,10 @@ const AddItems = () => {
           recipe: data.recipe,
           image: res.data.data.display_url,
         };
-        const menuRes = await axiosSecure.post("/menu", menuItem);
+        const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem);
         console.log(menuRes.data);
-        if (menuRes.data.insertedId) {
-          alert("data post");
+        if (menuRes.data.modifiedCount > 0) {
+          alert("data updated");
         }
       }
     } catch (error) {
@@ -44,8 +47,10 @@ const AddItems = () => {
 
   return (
     <div>
-      <SectionTitle heading="ADD AN ITEM" subheading="Whats new"></SectionTitle>
-
+      <SectionTitle
+        heading="Updated item"
+        subheading="Refresh info"
+      ></SectionTitle>
       <div className="mx-32 border  bg-black p-20 rounded-xl">
         <form className="space-y-4 " onSubmit={handleSubmit(onSubmit)}>
           <label className="form-control w-full ">
@@ -55,6 +60,7 @@ const AddItems = () => {
             <input
               type="text"
               placeholder="Type here"
+              defaultValue={name}
               {...register("name", { required: true })}
               className="input input-bordered w-full "
               required
@@ -68,7 +74,8 @@ const AddItems = () => {
                 <span className="label-text text-white">Select category</span>
               </div>
               <select
-                defaultValue="default"
+                // defaultValue="default"
+                defaultValue={category}
                 {...register("category", { required: true })}
                 required
                 className="select select-bordered w-full text-black "
@@ -92,6 +99,7 @@ const AddItems = () => {
                 <input
                   type="text"
                   placeholder="Type here"
+                  defaultValue={price}
                   {...register("price", { required: true })}
                   required
                   className="input input-bordered w-full "
@@ -106,6 +114,7 @@ const AddItems = () => {
                 <span className=" text-white label-text">Your Opinion</span>
               </div>
               <textarea
+                defaultValue={recipe}
                 {...register("recipe", { required: true })}
                 required
                 className="textarea textarea-bordered h-24"
@@ -125,7 +134,7 @@ const AddItems = () => {
               </div>
             </div>
             <div className="flex-1">
-              <button className="btn btn-outline bg-white">Add item</button>
+              <button className="btn btn-outline bg-white">Update menu item</button>
             </div>
           </div>
         </form>
@@ -134,4 +143,4 @@ const AddItems = () => {
   );
 };
 
-export default AddItems;
+export default UpdateItem;
