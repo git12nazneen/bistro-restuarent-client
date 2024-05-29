@@ -1,11 +1,13 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
+import useCard from "../hooks/useCard";
 
 const Dashboard = () => {
 
   // TODO: get isAdmin value from the db
   const [isAdmin] = useAdmin();
+  const [cart] = useCard()
 
   return (
     <div className="flex">
@@ -36,16 +38,17 @@ const Dashboard = () => {
             <NavLink to="/dashboard/userHome">User home</NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/reservation">Reservation</NavLink>
+            <NavLink to="/dashboard/history">History</NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/cart">My Cart</NavLink>
+            <NavLink to="/dashboard/cart">My Cart({cart.length})</NavLink>
           </li>
           <li>
             <NavLink to="/dashboard/addReview">Add Review</NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/myBookings">My Bookings</NavLink>
+            {/* <NavLink to="/dashboard/myBookings">My Bookings</NavLink> */}
+            <NavLink to="/dashboard/paymentHistory">Real Payment History</NavLink>
           </li>
           </>
          }

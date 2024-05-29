@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
 import useCard from "../hooks/useCard";
+import useAdmin from "../hooks/useAdmin";
 const Nav = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState(0);
   const [cart] = useCard()
+  const [isAdmin] = useAdmin()
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -61,6 +63,17 @@ const Nav = () => {
       <li className="px-3">
         <Link to="/secret">Secret</Link>
       </li>
+
+      {
+        user && isAdmin &&  <li className="px-3">
+        <Link to="/dashboard/userHome">Dashboard</Link>
+      </li>
+      }
+      {
+        user && !isAdmin &&  <li className="px-3">
+        <Link to="/dashboard/adminHome">Dashboard</Link>
+      </li>
+      }
 
       {user ? (
         <>
