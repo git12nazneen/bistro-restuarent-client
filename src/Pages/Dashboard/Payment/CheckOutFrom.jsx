@@ -26,7 +26,6 @@ const CheckOutFrom = () => {
       }
     },[axiosSecure, totalPrice])
 
-
     const handleSubmit = async (event)=>{
         event.preventDefault();
 
@@ -72,9 +71,7 @@ const CheckOutFrom = () => {
           if(paymentIntent.status === 'succeeded'){
             console.log('transaction id', paymentIntent.id)
             setTransactionId(paymentIntent.id);
-
-
-            // now save the payment in the db
+            // now save the payment in the db db
             const payment = {
               email: user.email,
               price: totalPrice,
