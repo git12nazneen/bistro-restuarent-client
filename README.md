@@ -2,6 +2,7 @@
 
 Bistro Boss is a restaurant website where customers can browse and purchase food items. The site offers a user-friendly interface for viewing the menu, selecting items, and placing orders.
 
+<p>Click here <a href="https://bistro-boss-6004a.web.app/">Live site</a></p>
 
 ## Features
 - Browse the menu with various categories of food items
